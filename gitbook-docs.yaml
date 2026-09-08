@@ -1,0 +1,37 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: Documentation
+  structure:
+    - type: section
+      key: purple-team-lab
+      title: Purple Team Lab
+      path: ptnotes
+      children:
+        - type: space
+          key: detectionstack
+          title: Detection Stack
+          path: detstack
+          content:
+            directory: ./docs/detection-stack
+            language: en
+        - type: space
+          key: goad
+          title: GOAD
+          path: goad
+          content:
+            directory: ./docs/goad
+            language: en
+        - type: space
+          key: maldev
+          title: MalDev
+          path: maldev
+          content:
+            directory: ./docs/maldev
+            language: en
+        - type: space
+          key: crto
+          title: CRTO I
+          path: crto
+          content:
+            directory: ./docs/crtoi
+            language: en

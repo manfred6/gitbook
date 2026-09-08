@@ -6,7 +6,7 @@ site:
       key: purple-team-lab
       title: Purple Team Lab
       path: ptnotes
-      default : true
+      default: true
       children:
         - type: space
           key: detectionstack

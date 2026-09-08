@@ -11,6 +11,7 @@ site:
           key: detectionstack
           title: Detection Stack
           path: detstack
+          default: true
           content:
             directory: ./docs/detection-stack
             language: en

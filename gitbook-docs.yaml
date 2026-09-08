@@ -1,6 +1,6 @@
 $schema: https://api.gitbook.com/gitbook-docs.yaml
 site:
-  title: Documentation
+  title: manfred
   structure:
     - type: section
       key: purple-team-lab
@@ -37,3 +37,7 @@ site:
           content:
             directory: ./docs/crtoi
             language: en
+    - type: section
+      key: cheatsheet
+      title: Cheatsheets
+      path: cheatsheet

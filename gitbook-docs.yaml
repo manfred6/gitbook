@@ -41,3 +41,12 @@ site:
       key: cheatsheet
       title: Cheatsheets
       path: cheatsheet
+      children:
+        - type: space
+          key: winforensics
+          title: Windows Forensics
+          path: winforensics
+          default: true
+          content:
+            directory: ./docs/windows-forensics
+            language: en

@@ -85,8 +85,8 @@ apt -y install proxmox-ve postfix open-iscsi chrony && \
 
 ### Proxmox Web UI
 
-As Proxmox has now been installed, we can access the web UI at `https://<YOUR_IP>:8006/`. 
-First, however, I lock down the proxmox API to be accessible only from localhost and `192.168.1.3`, which will be our IAC Provisioning LXC container:
+As Proxmox has now been installed, we can configure the web ui. We want the Proxmox API to be accessible only from `localhost` and `192.168.1.3`, which will be our IAC Provisioning LXC container:
+To do this, we adjust the pveproxy config as follows:
 ```bash
 cat << EOF > /etc/default/pveproxy
 LISTEN_IP="0.0.0.0"
@@ -97,6 +97,36 @@ EOF
 
 systemctl restart pveproxy.service
 ```
+
+To reach the web ui from your development machine, you can add this stanza to your `~/.ssh/config`:
+```text
+Host <HOSTNAME>
+   User root
+   Hostname <PVE_PUBLIC_IP>
+   Port 22
+   IdentityFile ~/.ssh/id_ed25519
+```
+> be sure to replace <HOSTNAME> and <PVE_PUBLIC_IP> with your individual values.
+
+I created a small bash script to automate this process:
+
+```bash
+#!/bin/bash
+
+set -euo pipefail
+
+echo "(i) -> Connecting to ARES ..."
+
+ssh -i "$HOME/.ssh/id_ed25519" -fN -L 8006:localhost:8006 root@ares
+
+if [ $? -eq 0 ]; then
+    echo "(+) Connected to PVE! Visit https://localhost:8006/ to reach the UI."
+else
+    echo "(!) Could not connect to PVE."
+fi
+```
+> note also that this uses my path for my ssh key. You might have to adjust this.
+
 
 ### Disable Enterprise Repo
 

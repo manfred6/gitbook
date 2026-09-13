@@ -148,6 +148,7 @@ On Ubuntu/systemd-resolved, Ansible thereby configures:
 DNS=192.168.30.1
 Domains=ares.internal ~.
 ```
+> `~.` instructs systemd-resolved to make this DNS server authoritative for all domains, includeing the one specified explicitely.
 
 K3S is pointed at:
 
@@ -213,7 +214,7 @@ Conceptually:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: lab-wildcard
+  name: ares-lab-wildcard
   namespace: kube-system
 spec:
   secretName: ares-lab-wildcard-tls
@@ -346,7 +347,7 @@ which should output something like the following:
 ```text
 NAME                                 TYPE                 DATA   AGE
 cert-manager-webhook-ca              Opaque               3      2d14h
-lab-issuing-ca                       kubernetes.io/tls    2      2d14h
+ares-lab-issuing-ca                  kubernetes.io/tls    2      2d14h
 sh.helm.release.v1.cert-manager.v1   helm.sh/release.v1   1      2d14h
 sh.helm.release.v1.cert-manager.v2   helm.sh/release.v1   1      38h
 ```

@@ -1,5 +1,5 @@
 # Table of contents
 
-* [Packing the Host](./src/packer.md)
+* [Templating](./src/packer.md)
 * [Terraforming](./src/terraform.md)
-* [Provisioning the Server-Side Stack](./src/docker.md)
+* [Provisioning](./src/k3s.md)

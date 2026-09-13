@@ -1,4 +1,4 @@
-# Packing the Host
+# Packer
 
 First, we must generate an Ubuntu template on our Proxmox instance that we can use with terraform.
 This allows us to customize the image, and keep it up to date using CI later on. 
@@ -151,5 +151,5 @@ packer build .
 
 This can also be found in the repo mentioned above, in [`scripts/packer.sh`](https://github.com/manfred6/ares-detection/blob/main/packer/scripts/packer.sh).
 
-If everything runs smoothly, we now have a new template in proxmox called `packer-ubuntu-resolute-base` that we can use with terraform in our next steps.
+If everything runs smoothly, we now have a new template in proxmox called `packer-ubuntu-resolute-base`, that we can use with terraform in our next steps.
 

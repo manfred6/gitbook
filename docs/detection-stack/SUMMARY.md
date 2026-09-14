@@ -5,3 +5,4 @@
 * [Provisioning](./src/k3s.md)
 * [Elastic Stack](./src/eck.md)
 * [Connecting GOAD](./src/agents.md)
+* [Connecting Git](.src/ci.md)

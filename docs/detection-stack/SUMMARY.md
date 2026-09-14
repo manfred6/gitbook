@@ -4,4 +4,4 @@
 * [Terraforming](./src/terraform.md)
 * [Provisioning](./src/k3s.md)
 * [Elastic Stack](./src/eck.md)
-* [Connecting GOAD](./src/goad.md)
+* [Connecting GOAD](./src/agents.md)

@@ -71,8 +71,7 @@ This is not necessary in this case for a couple of reasons:
 This is added by defauly by K3S. Its `local-path` provisioner creates each `PersistentVolume` with node affinity for the node on which its data resides.
 As such, this is already our desired default.
 - Second, should a worker node fail, we wouldnt want two elasticsearch pods to be on that very node. When using multiple Elasticsearch pods, they should be distributed across separate Kubernetes nodes so that the loss of one K3S node does not remove multiple Elasticsearch instances at once. ECK already accounts for this. ECK already applies a preferred pod anti-affinity rule by default, using `kubernetes.io/hostname` as the boundary. It also configures elasticsearch with kubernetes node allocation awareness, preventing a primary shard and its replica from being allocated to elasticsearch pods running on the same kubernetes node.
-
-
+> note this only protects against pod, node and vm failure, NOT agains host or disk failure.
 
 
 ## Deployment
@@ -131,4 +130,6 @@ Once connected to the wireguard tunnel, we can access kibana using the provision
 ![](../img/kibana.png)
 
 > note we can import the CA certificate from `.secrets` into our browser to skip the TLS validation warning
+
 ---
+

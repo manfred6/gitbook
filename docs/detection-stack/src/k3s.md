@@ -19,26 +19,28 @@ k3s-node-02 ansible_host=192.168.30.52 ansible_user=ubuntu
 k3s-node-03 ansible_host=192.168.30.53 ansible_user=ubuntu
 ```
 
-Before we do anything, we need to set up a virtual environment for ansible, and install the prerequisite python packages and ansible modules into it. This is important, as we run GOAD on the same host, and we dont want to mix up ansible / provider versions. Ive provided a convenience script [here]():
+Before we do anything, we need to set up a virtual environment for ansible, and install the prerequisite python packages and ansible modules into it. This is important, as we run GOAD on the same host, and we dont want to mix up ansible / provider versions. Ive provided a convenience script [`here`](https://github.com/manfred6/ares-infra/blob/main/ansible/scripts/venv.sh):
 
 ```bash
 #!/bin/bash
 
-set -euo pipefail
+[[ -d .venv ]] || {
+    python3 -m venv .venv
+}
 
-python3 -m venv .venv
 source .venv/bin/activate
 
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-
-ansible-galaxy collection install -r requirements.yml
+if [[ $# -gt 1 && $1 == "install" ]]; then
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+    ansible-galaxy collection install -r requirements.yml
+fi
 ```
 
 This can be executed as follows:
 
 ```bash
-bash scripts/venv.sh
+bash scripts/venv.sh install
 ```
 
 We can now test if ansible is wired up correctly using my `ping.yml` test as follows:
@@ -258,8 +260,8 @@ Okay now that ive explained the whole setup, lets go and deploy it.
 
 #### K3S
 
-To deploy K3S, I created a dedicated ansible role [`k3s`]().
-Settings can be adjusted in [`defaults/main.yml]().
+To deploy K3S, I created a dedicated ansible role [`k3s`](https://github.com/manfred6/ares-infra/tree/main/ansible/roles/k3s).
+Settings can be adjusted in [`defaults/main.yml](https://github.com/manfred6/ares-infra/blob/main/ansible/roles/k3s/defaults/main.yml).
 
 We can deploy it using the following command:
 
@@ -297,7 +299,7 @@ We can now move to setting up `cert-manager` and our PKI infra.
 #### cert-manager
 
 The generation of our PKI is managed fully by Ansible. Therefore, we can generate the PKI as well as deploy `cert-manager` in one command:
-Like for the K3S cluster itself, the PKI and `cert-manager` settings are defined in [defaults/main.yml]().
+Like for the K3S cluster itself, the PKI and `cert-manager` settings are defined in [`defaults/main.yml`](https://github.com/manfred6/ares-infra/blob/main/ansible/roles/cert_manager/defaults/main.yml).
 
 ```bash
 ansible-playbook -i inventory/hosts.ini playbooks/cert-manager.yml
@@ -372,7 +374,7 @@ notAfter=Sep  9 19:15:15 2031 GMT
 
 #### Traefik
 
-The `Traefik` role bundles `MetalLB` as well. Its settings can be configured in [defaults/main.yml]().
+The `Traefik` role bundles `MetalLB` as well. Its settings can be configured in [`defaults/main.yml`](https://github.com/manfred6/ares-infra/blob/main/ansible/roles/cert_manager/defaults/main.yml).
 Trafik can, like the other services, be set up using the following command:
 
 ```bash
@@ -394,3 +396,6 @@ traefik-59b7647586-6fpdp                  1/1     Running     1 (38h ago)   2d17
 ```
 
 Now, we should be all set for deploying ECK. Its deployment and configuration shall be discussed in the next section.
+
+---
+

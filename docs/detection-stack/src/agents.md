@@ -6,7 +6,7 @@ This goes over how I install and connect the elastic agent, as well as Sysmon in
 ## Ansible
 
 Since GOAD is already instrumented through ansible by default, it surmised this would be the best, most efficient way of connecting and managing the actual telemetry aspect of this purple team lab.
-To actually connect it, I simply need to add the existing GOAD inventory into my `inventory/hosts.ini` file. This then becomes something like the following:
+To actually connect it, I simply need to add the existing GOAD inventory into my [`inventory/hosts.ini`](https://github.com/manfred6/ares-infra/blob/main/ansible/inventory/hosts.example.ini) file. This then becomes something like the following:
 
 ```ini
 [k3s_servers]
@@ -28,7 +28,7 @@ goad_domain_controllers
 goad_members
 ```
 
-Also, we need to add the connection variables to our `inventory/group_vars/goad_windows.yml`:
+Also, we need to add the connection variables to our [`inventory/group_vars/goad_windows.yml`](https://github.com/manfred6/ares-infra/blob/main/ansible/inventory/group_vars/goad_windows.yml):
 
 ```yaml
 ansible_become: false
@@ -80,7 +80,7 @@ dc01 | SUCCESS => {
 ## Elastic Agent
 
 Now that we have basic connectivity, we can deploy the elastic agent and connect the endpoints to our elastic cluster.
-To automate this, ive added another role called [elastic_agent](). Before we run it, we need to generate the policy manually in Fleet, and copy the enrollment token.
+To automate this, ive added another role called [`elastic_agent`](https://github.com/manfred6/ares-infra/tree/main/ansible/roles/elastic_agent). Before we run it, we need to generate the policy manually in Fleet, and copy the enrollment token.
 
 Navigate to the following panel in `kibana.ares.internal`:
 
@@ -101,7 +101,7 @@ Now, you can click on:
 Actions -> Add agent
 ```
 
-and copy out the enrollment token. This, you need to add into `roles/elastic_agent/defaults/main.yml`:
+and copy out the enrollment token. This, you need to add into [`roles/elastic_agent/defaults/main.yml`](https://github.com/manfred6/ares-infra/blob/main/ansible/roles/elastic_agent/defaults/main.yml):
 
 ```yml
 elastic_fleet_enrollment_token: <YOUR_TOKEN>
@@ -133,7 +133,7 @@ For now, to get things up and running, I use Olaf Hartongs [`sysmon-modular`](ht
 By default I install the `default` configuration, to minimize data volume as I have limited space.
 This will be adjusted on an as-needed basis using this ansible role, if im testing specific detections which may need more verbose and/or specialized telemetry.
 
-Ive automated the rollout and configuration with a dedicated [ansible role](). This role also allows specification of different sysmon configurations by dropping it into `roles/sysmon/files/`, and adjusting the following variable in `roles/sysmon/defaults/main.yml`:
+Ive automated the rollout and configuration with a dedicated [`sysmon`](https://github.com/manfred6/ares-infra/tree/main/ansible/roles/sysmon) role. This role also allows specification of different sysmon configurations by dropping it into [`roles/sysmon/files/`](https://github.com/manfred6/ares-infra/tree/main/ansible/roles/sysmon/files), and adjusting the following variable in [`roles/sysmon/defaults/main.yml`](https://github.com/manfred6/ares-infra/blob/main/ansible/roles/sysmon/defaults/main.yml):
 
 ```yaml
 sysmon_config_source: <YOUR_DESIRED_CONFIG>

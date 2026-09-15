@@ -6,3 +6,4 @@
 * [Elastic Stack](./src/eck.md)
 * [Connecting GOAD](./src/agents.md)
 * [Connecting Git](./src/ci.md)
+* [Detection as Code](./src/dac.md)

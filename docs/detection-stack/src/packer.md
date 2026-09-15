@@ -92,7 +92,7 @@ source "proxmox-iso" "ubuntu" {
 ```
 
 This will generate a single ubuntu template (`packer-ubuntu-resolute-base`). Importantly, this will be provisioned using DHCP in the same subnet as our provisioning LXC.
-All settings and OS-level operations are contained in (1) the `http/user-data.yaml` file (such as installed packages) and (2) the shell provisioner for this `proxmox-iso` resource:
+All settings and OS-level operations are contained in (1) the [`http/user-data.yaml`](https://github.com/manfred6/ares-infra/blob/main/packer/http/user-data.yaml) file (such as installed packages) and (2) the shell provisioner for this `proxmox-iso` resource:
 
 ```hcl
 build {
@@ -112,12 +112,12 @@ build {
 }
 ```
 
-Here, it can be seen that we check that the `qemu-guest-agent` is installed and active (this gets installed using `http/user-data.yaml`, as well as some sysprep steps such as ensuring individual ssh keys get generated upon cloning, logs are cleared, machine uuid is reset, etc.
+Here, it can be seen that we check that the `qemu-guest-agent` is installed and active (this gets installed using [`http/user-data.yaml`](https://github.com/manfred6/ares-infra/blob/main/packer/http/user-data.yaml), as well as some sysprep steps such as ensuring individual ssh keys get generated upon cloning, logs are cleared, machine uuid is reset, etc.
 
 
 ## Packer Build
 
-First, however, we must generate some SSH keys, as packer does not provide a native plugin for this such as Terraform would. We can do this using [the following script](https://github.com/manfred6/ares-detection/blob/main/packer/scripts/secrets.sh):
+First, however, we must generate some SSH keys, as packer does not provide a native plugin for this such as Terraform would. We can do this using [`the following script`](https://github.com/manfred6/ares-infra/blob/main/packer/scripts/secrets.sh):
 
 ```bash
 #!/bin/bash
@@ -149,7 +149,9 @@ packer validate .
 packer build .
 ```
 
-This can also be found in the repo mentioned above, in [`scripts/packer.sh`](https://github.com/manfred6/ares-detection/blob/main/packer/scripts/packer.sh).
+This can also be found in the repo mentioned above, in [`scripts/packer.sh`](https://github.com/manfred6/ares-infra/blob/main/packer/scripts/packer.sh).
 
 If everything runs smoothly, we now have a new template in proxmox called `packer-ubuntu-resolute-base`, that we can use with terraform in our next steps.
+
+---
 

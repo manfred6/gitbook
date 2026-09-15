@@ -1,7 +1,7 @@
 # Connecting Git
 
 Now that we have elastic and GOAD set up, I want to create and connect a github repository containing all detections I write, as well as their respective CI/CD setup.
-I want this to be wired up in a [`VCS-Authoritative`]() setup. This brings with it important security considerations.
+I want this to be wired up in a [`VCS-Authoritative`](https://dac-reference.readthedocs.io/en/latest/core_components_and_governance_models_of_dac.html) setup. This brings with it important security considerations.
 The runners need a way to actually edit rules in Kibana, which requires access into my lab environment on both the network and identity planes.
 Since the repo is public, this potentially opens up a path into my environment for anyone who can access and modify the repo, or anyone who can mess with github runners generally.
 I dont really want to even open myself up to the risk, and id like to maintain control over all the infra Io can in case they decide to ever add pricing to self-hosted runners etc. I like the autonomy.
@@ -9,7 +9,7 @@ As such, ill deploy `Gitea` on my k3s cluster, and simply mirror the rules into 
 
 ## Gitea
 
-To deploy Gitea, I created a corresponding Ansible role [`gitea`](), which deploys Gitea on the k3s cluster with traefik ingress, and configures runners, also on k3s.
+To deploy Gitea, I created a corresponding Ansible role [`gitea`](https://github.com/manfred6/ares-infra/tree/main/ansible/roles/gitea), which deploys Gitea on the k3s cluster with traefik ingress, and configures runners, also on k3s.
 I disable postgres and valkey as its only myself using it in a lab setting, therefore keeping it lightweight is a priority.
 
 First, the venv must be activated on the provisioning host:
@@ -18,7 +18,7 @@ First, the venv must be activated on the provisioning host:
 bash scripts/venv.sh
 ```
 
-The Gitea configuration is as usual present in `roles/gitea/defaults/main.yml`.
+The Gitea configuration is as usual present in [`roles/gitea/defaults/main.yml`](https://github.com/manfred6/ares-infra/blob/main/ansible/roles/gitea/defaults/main.yml).
 First, I set a password for the `Gitea Admin`:
 
 ```bash
@@ -66,7 +66,7 @@ I now add a dedicated user for myself to host the ares-dac repo under, as this u
 
 ## Mirror
 
-Now, I create the `ares-dac` repos in Gitea and Github, and configure the mirroring.
+Now, I create the [`ares-dac`](https://github.com/manfred6/ares-dac) repos in Gitea and Github, and configure the mirroring.
 
 First, create the repo and generate a PAT in github (`Contents: Read Write`).
 Once created, copy the PAT, create the repo in Gitea, and add the Github repo under `Mirror Settings as follows:

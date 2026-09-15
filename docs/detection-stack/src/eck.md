@@ -5,9 +5,9 @@ This section details the configuration and deployment of the Elastic Cloud on Ku
 ## Configuration
 
 As mentioned previously, all deployments on my ECK cluster are managed through Ansible. 
-This includes ECK, which is configued and deployed using [this]() Ansible role.
+This includes ECK, which is configued and deployed using my [`eck`](https://github.com/manfred6/ares-infra/tree/main/ansible/roles/eck) Ansible role.
 
-Within [tasks/main.yml](), the Elasticsearch deployment is defined as follows:
+Within [`tasks/main.yml`](https://github.com/manfred6/ares-infra/blob/main/ansible/roles/eck/tasks/main.yml), the Elasticsearch deployment is defined as follows:
 
 ```yaml
 - name: Deploy single-node Elasticsearch
@@ -76,7 +76,7 @@ As such, this is already our desired default.
 
 ## Deployment
 
-First, we must activate the venv. This can be done using [this helper script]() as follows:
+First, we must activate the venv. This can be done using [`this helper script`](https://github.com/manfred6/ares-infra/blob/main/ansible/scripts/venv.sh) as follows:
 
 ```bash
 bash sripts/venv.sh
@@ -84,7 +84,7 @@ bash sripts/venv.sh
 
 Now that the venv is activated, we can deploy our elasticsearch cluster.
 
-All settings are defined in [defaults/main.yml](), and can be adjusted there.
+All settings are defined in [`defaults/main.yml`](https://github.com/manfred6/ares-infra/blob/main/ansible/roles/eck/defaults/main.yml), and can be adjusted there.
 Kibana and Fleet are defined and configured in the same fashion as the elasticsearch cluster.
 
 This role can be deployed as such:

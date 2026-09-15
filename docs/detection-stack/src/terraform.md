@@ -3,7 +3,7 @@
 Picking up where we left off in the Packer section (read this if you havent already before continuing), we are now ready to deploy the virtual machines that encompass our future detection stack services.
 To achieve this in a reproducable, auditable and scalable way, we leverage [`Hashi Corp Terraform`](https://developer.hashicorp.com/terraform). 
 Terraform is an infrastructure as code (IaC) framework, which allows for the declarative management of infrastructure. In our current case, this will be the three virtual machines that will host the kubernetes services to be deployed in later steps.
-The source code for this particular setup can be found in the dedicated [`ares-inra](https://github.com/manfred6/ares-infra) repository, under the [`terraform`](https://github.com/manfred6/ares-infra/tree/main/terraform) directory.
+The source code for this particular setup can be found in the dedicated [`ares-infra`](https://github.com/manfred6/ares-infra) repository, under the [`terraform`](https://github.com/manfred6/ares-infra/tree/main/terraform) directory.
 Included there are also scripts, which automate the linting and deployment of the provided configuration.
 
 ## Terraform Providers

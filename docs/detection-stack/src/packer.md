@@ -2,9 +2,9 @@
 
 First, we must generate an Ubuntu template on our Proxmox instance that we can use with terraform.
 This allows us to customize the image, and keep it up to date using CI later on. 
-To achieve this, we will use [HashiCorp Packer](https://developer.hashicorp.com/packer/integrations/hashicorp/proxmox).
+To achieve this, we will use [`HashiCorp Packer`](https://developer.hashicorp.com/packer/integrations/hashicorp/proxmox).
 We will continue using the provisioning LXC we set up for instantiating GOAD, as this is already in the correct network segment and has all prerequisites installed. Also, this reuse allows us to be efficient with our limited compute resources.
-The source code can be found [in the dedicated `ares-detection repository`](https://github.com/manfred6/ares-detection).
+The source code can be found in the dedicated [`ares-infra`](https://github.com/manfred6/ares-detection) repo.
 
 ## Obtaining the Image
 

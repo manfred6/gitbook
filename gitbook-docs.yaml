@@ -5,16 +5,23 @@ site:
     - type: section
       key: purple-team-lab
       title: Purple Team Lab
-      path: ptnotes
+      path: lab
       default: true
       children:
         - type: space
+          key: detections
+          title: Detection Engineering
+          path: deteng
+          content:
+            directory: ./docs/deteng
+            language: en
+        - type: space
           key: detectionstack
           title: Detection Stack
-          path: detstack
+          path: ptlab
           default: true
           content:
-            directory: ./docs/detection-stack
+            directory: ./docs/ptlab
             language: en
         - type: space
           key: goad
@@ -23,30 +30,23 @@ site:
           content:
             directory: ./docs/goad
             language: en
-        - type: space
-          key: maldev
-          title: MalDev
-          path: maldev
-          content:
-            directory: ./docs/maldev
-            language: en
-        - type: space
-          key: crto
-          title: CRTO I
-          path: crto
-          content:
-            directory: ./docs/crtoi
-            language: en
     - type: section
-      key: cheatsheet
-      title: Cheatsheets
-      path: cheatsheet
+      key: notes
+      title: Notes
+      path: notes
       children:
         - type: space
-          key: winforensics
-          title: Windows Forensics
-          path: winforensics
+          key: redteam
+          title: Red Team
+          path: redteam
           default: true
           content:
-            directory: ./docs/windows-forensics
+            directory: ./docs/notes/redteam
+            language: en
+        - type: space
+          key: blueteam
+          title: Blue Team
+          path: blueteam
+          content:
+            directory: ./docs/notes/blueteam
             language: en

@@ -44,6 +44,12 @@ site:
             directory: ./docs/notes/redteam
             language: en
         - type: space
+          key: maldev
+          title: Malware
+          path: maldev
+            content: directory: ./docs/maldev
+            language: en
+        - type: space
           key: blueteam
           title: Blue Team
           path: blueteam

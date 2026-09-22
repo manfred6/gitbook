@@ -47,7 +47,8 @@ site:
           key: maldev
           title: Malware
           path: maldev
-            content: directory: ./docs/maldev
+          content: 
+            directory: ./docs/maldev
             language: en
         - type: space
           key: blueteam

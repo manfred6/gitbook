@@ -36,10 +36,17 @@ site:
       path: notes
       children:
         - type: space
+          key: h8
+          title: h8
+          path: h8
+          default: true
+          content:
+            directory: ./docs/notes/h8
+            language:en
+        - type: space
           key: redteam
           title: Red Team
           path: redteam
-          default: true
           content:
             directory: ./docs/notes/redteam
             language: en

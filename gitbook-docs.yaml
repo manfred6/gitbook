@@ -42,7 +42,7 @@ site:
           default: true
           content:
             directory: ./docs/notes/h8
-            language:en
+            language: en
         - type: space
           key: redteam
           title: Red Team

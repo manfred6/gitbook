@@ -1,3 +1,3 @@
-# Red Teaming
+# Red Team Notes
 
-Notes
+Various Red Team notes.
